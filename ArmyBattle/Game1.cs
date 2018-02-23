@@ -11,6 +11,11 @@ namespace ArmyBattle
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Texture2D[] sprites;
+        int currSprite;
+        int animFrame;
+        Vector2 pos;
+        float rotation;
         
         public Game1()
         {
@@ -40,7 +45,14 @@ namespace ArmyBattle
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            this.sprites = new Texture2D[2];
+            this.sprites[0] = Content.Load<Texture2D>("Copter1");
+            this.sprites[1] = Content.Load<Texture2D>("Copter2");
+            this.currSprite = 0;
+            this.animFrame = 0;
+
+            this.pos = Vector2.Zero;
+            this.rotation = 0.0f;
         }
 
         /// <summary>
@@ -62,6 +74,20 @@ namespace ArmyBattle
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            this.pos.X += GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X;
+            this.pos.Y -= GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.Y;
+
+            this.rotation += GamePad.GetState(PlayerIndex.One).ThumbSticks.Right.X / 4;
+
+            this.animFrame += 1;
+            if (this.animFrame > 4)
+            {
+                this.animFrame = 0;
+                this.currSprite += 1;
+                this.currSprite = this.currSprite % 2; 
+            }
+
+
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -76,6 +102,10 @@ namespace ArmyBattle
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+
+            this.spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
+            this.spriteBatch.Draw(this.sprites[this.currSprite], pos, new Rectangle(0, 0, 16, 24), Color.White, rotation, new Vector2(8, 16), 4.0f, SpriteEffects.None, 1.0f);
+            this.spriteBatch.End();
 
             base.Draw(gameTime);
         }
