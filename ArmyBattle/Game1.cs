@@ -15,11 +15,18 @@ namespace ArmyBattle
         int currSprite;
         int animFrame;
         Vector2 pos;
+        Vector2 vel;
+        Vector2 acc;
         float rotation;
         
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferWidth = 1920;
+            graphics.PreferredBackBufferHeight = 1080;
+            //graphics.IsFullScreen = true;
+            graphics.ApplyChanges();
+
             Content.RootDirectory = "Content";
         }
 
@@ -52,6 +59,8 @@ namespace ArmyBattle
             this.animFrame = 0;
 
             this.pos = Vector2.Zero;
+            this.vel = Vector2.Zero;
+            this.acc = Vector2.Zero;
             this.rotation = 0.0f;
         }
 
@@ -74,10 +83,39 @@ namespace ArmyBattle
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            this.pos.X += GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X;
-            this.pos.Y -= GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.Y;
+
+            // Move the helicopter
+
+            this.vel.X += GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X;
+            this.vel.Y -= GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.Y;
+
+            this.vel.X = this.vel.X * 0.90f;
+            this.vel.Y = this.vel.Y * 0.90f;
+
+            this.pos += this.vel;
+
+
+            // Wrap around the screen with this logic
+
+            if (this.pos.X > 1920 + 8)
+                this.pos.X = this.pos.X % 1920;
+            
+            if (this.pos.X < -8)
+                this.pos.X = 1920 - this.pos.X;
+
+            if (this.pos.Y > 1080 + 16)
+                this.pos.Y = this.pos.Y % 1080;
+
+            if (this.pos.Y < -8)
+                this.pos.Y = 1080 - this.pos.Y;
+            
+
+            // Rotate
 
             this.rotation += GamePad.GetState(PlayerIndex.One).ThumbSticks.Right.X / 4;
+
+
+            // Change animation frames
 
             this.animFrame += 1;
             if (this.animFrame > 4)
