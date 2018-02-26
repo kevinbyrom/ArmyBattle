@@ -13,9 +13,6 @@ namespace ArmyBattle.Framework.States
 {
     public interface IState
     {
-        void Initialize();
-        void Enter();
-        void Update(GameTime gameTime);
-        void Exit();
+        public Action<GameTime> Enter;
     }
 }

@@ -5,27 +5,46 @@ using Microsoft.Xna.Framework;
 
 namespace ArmyBattle.Framework.States
 {
-    public class StateMachine
+    public class StateMachine<TID>
     {
-        public List<IState> States;
-        private IState currState;
+        private Dictionary<TID, State> states;
+        private State currState;
+
+
+        public State this[TID id]
+        {
+            get
+            {
+                if (!this.states.ContainsKey(id))
+                    this.states.Add(id, new State());
+                                      
+                return this.states[id];
+            }
+            set
+            {
+                this.states[id] = value;
+            }
+        }
 
 
         public StateMachine()
         {
-            this.States = new List<IState>();
+            this.states = new Dictionary<TID, State>();
+            this.currState = null;
         }
+
 
         public void Update(GameTime gameTime)
         {
-            this?.currState.Update(gameTime);
+            this.currState?.Update?.Invoke(gameTime);
         }
 
-        public void SetState(IState state)
+
+        public void SetState(TID id)
         {
-            this?.currState.Exit();
-            this.currState = state;
-            this?.currState.Enter();
+            this.currState?.Exit?.Invoke();
+            this.currState = this.states[id];
+            this.currState?.Enter?.Invoke();
         }
     }
 }

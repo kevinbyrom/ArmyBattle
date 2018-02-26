@@ -8,12 +8,12 @@ namespace ArmyBattle.Entities.Characters
 {
     public class SoldierStandingState : StateBase<Soldier>
     {
-        public Animation StandAnimation;
+        
 
 
         public SoldierStandingState(Game game, Soldier soldier) : base(game, soldier)
         {
-            this.StandAnimation = Animation.Create(new Rectangle(0, 0, 32, 32));
+            
         }
 
 
@@ -21,8 +21,7 @@ namespace ArmyBattle.Entities.Characters
         {
             base.Enter();
 
-            this.Entity.Animation.Animation = this.StandAnimation;
-            this.Entity.Velocity = Vector2.Zero;
+
         }
     }
 }

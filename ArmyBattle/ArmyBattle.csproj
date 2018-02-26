@@ -63,10 +63,7 @@
     <Compile Include="Framework\Messaging\MessageType.cs" />
     <Compile Include="Framework\States\IState.cs" />
     <Compile Include="Framework\States\StateBase.cs" />
-    <Compile Include="Entities\Characters\SoldierStandingState.cs" />
-    <Compile Include="Entities\Characters\SoldierShootingState.cs" />
     <Compile Include="Framework\States\StateMachine.cs" />
-    <Compile Include="Entities\Characters\SoldierWalkingState.cs" />
     <Compile Include="Entities\Vehicles\FuelComponent.cs" />
     <Compile Include="Entities\AnimationComponent.cs" />
     <Compile Include="Entities\FiringComponent.cs" />
