@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ArmyBattle.Messaging
+namespace ArmyBattle.Framework.Messaging
 {
-    interface IMessageReceiver
+    public enum MessageType
     {
-        void ReceiveMessage(Message msg);
     }
 }

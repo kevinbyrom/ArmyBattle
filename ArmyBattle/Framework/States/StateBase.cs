@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 
 
-namespace ArmyBattle.States
+namespace ArmyBattle.Framework.States
 {
     public abstract class StateBase<T> : IState where T : GameComponent
     {
@@ -28,7 +28,7 @@ namespace ArmyBattle.States
 
         public virtual void Enter() { }
 
-        public virtual void Update(GameTime gameTimey) { }
+        public virtual void Update(GameTime gameTime) { }
 
         public virtual void Exit() { }
 

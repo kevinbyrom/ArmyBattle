@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 
 
-namespace ArmyBattle.States
+namespace ArmyBattle.Framework.States
 {
     public interface IState
     {

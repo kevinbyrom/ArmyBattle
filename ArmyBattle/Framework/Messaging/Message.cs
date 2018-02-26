@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ArmyBattle.Messaging
+namespace ArmyBattle.Framework.Messaging
 {
-    public enum MessageType
+    public struct Message
     {
+        public MessageType MessageType;
     }
 }
