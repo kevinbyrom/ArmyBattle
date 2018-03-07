@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace ArmyBattle.Framework.States
 {
-    public abstract class StateBase<T> : IState where T : GameComponent
+    /*public abstract class StateBase<T> : IState where T : GameComponent
     {
         public Game Game { get; protected set; }
         public T Entity { get; protected set; }
@@ -32,5 +32,5 @@ namespace ArmyBattle.Framework.States
 
         public virtual void Exit() { }
 
-    }
+    }*/
 }

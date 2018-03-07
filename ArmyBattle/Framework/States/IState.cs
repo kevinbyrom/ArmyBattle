@@ -13,6 +13,8 @@ namespace ArmyBattle.Framework.States
 {
     public interface IState
     {
-        public Action<GameTime> Enter;
+        Action Enter { get; set; }
+        Action<GameTime> Update { get; set; }
+        Action Exit { get; set; }
     }
 }
