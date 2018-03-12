@@ -43,6 +43,9 @@ namespace ArmyBattle.Components
             base.Update(gameTime);
 
             this.TargetSprite.SourceRect = this.animation.FrameRects[this.currFrame];
+            this.currFrame += 1;
+            if (this.currFrame >= this.animation.FrameRects.Count())
+                this.currFrame = 0;
         }
     }
 }

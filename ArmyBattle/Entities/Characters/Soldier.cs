@@ -115,7 +115,10 @@ namespace ArmyBattle.Entities.Characters
             this.Velocity.Y = -padState.ThumbSticks.Left.Y;
 
             if (Math.Abs(padState.ThumbSticks.Right.X) > 0.5 || Math.Abs(padState.ThumbSticks.Right.Y) > 0.5) 
-                this.Facing = padState.ThumbSticks.Right;
+            {
+                this.Facing.X = padState.ThumbSticks.Right.X;
+                this.Facing.Y = -padState.ThumbSticks.Right.Y;
+            }
 
 
             // Set animation based on current movement / shooting
