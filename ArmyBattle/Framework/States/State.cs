@@ -13,9 +13,9 @@ namespace ArmyBattle.Framework.States
 {
     public class State
     {
-        public Action Enter;
-        public Action<GameTime> Update;
-        public Action Exit;
+        public Action Enter { get; set; }
+        public Action<GameTime> Update { get; set; }
+        public Action Exit { get; set; }
 
         public State()
         {

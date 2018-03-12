@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ArmyBattle.Utilities;
+using ArmyBattle.Entities.Characters;
 
 
 namespace ArmyBattle
@@ -13,23 +14,27 @@ namespace ArmyBattle
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D[] sprites;
-        int currSprite;
-        int animFrame;
-        Vector2 pos;
-        Vector2 vel;
-        Vector2 acc;
-        float rotation;
+        Soldier soldier;
+
+        //Texture2D[] sprites;
+        //int currSprite;
+        //int animFrame;
+        //Vector2 pos;
+        //Vector2 vel;
+        //Vector2 acc;
+        //float rotation;
         
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferWidth = 1920;
-            graphics.PreferredBackBufferHeight = 1080;
+            graphics.PreferredBackBufferWidth = 300;
+            graphics.PreferredBackBufferHeight = 300;
             //graphics.IsFullScreen = true;
             graphics.ApplyChanges();
 
             Content.RootDirectory = "Content";
+
+            this.soldier = new Soldier(this);
         }
 
         /// <summary>
@@ -43,6 +48,8 @@ namespace ArmyBattle
             // TODO: Add your initialization logic here
 
             base.Initialize();
+            this.soldier.Initialize();
+            this.soldier.Pos = new Vector2(50, 50);
         }
 
         /// <summary>
@@ -53,8 +60,12 @@ namespace ArmyBattle
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            this.Services.AddService<SpriteBatch>(spriteBatch);
 
-            this.sprites = new Texture2D[2];
+            this.soldier.LoadContent();
+
+            /*
+             * this.sprites = new Texture2D[2];
             this.sprites[0] = Content.Load<Texture2D>("Copter1");
             this.sprites[1] = Content.Load<Texture2D>("Copter2");
             this.currSprite = 0;
@@ -63,7 +74,7 @@ namespace ArmyBattle
             this.pos = Vector2.Zero;
             this.vel = Vector2.Zero;
             this.acc = Vector2.Zero;
-            this.rotation = 0.0f;
+            this.rotation = 0.0f;*/
         }
 
         /// <summary>
@@ -85,10 +96,11 @@ namespace ArmyBattle
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            this.soldier.Update(gameTime);
 
             // Move the helicopter
 
-            this.vel.X += GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X;
+            /*this.vel.X += GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X;
             this.vel.Y -= GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.Y;
 
             this.vel.X = this.vel.X * 0.90f;
@@ -125,7 +137,7 @@ namespace ArmyBattle
                 this.animFrame = 0;
                 this.currSprite += 1;
                 this.currSprite = this.currSprite % 2; 
-            }
+            }*/
 
 
             // TODO: Add your update logic here
@@ -144,7 +156,8 @@ namespace ArmyBattle
             // TODO: Add your drawing code here
 
             this.spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
-            this.spriteBatch.Draw(this.sprites[this.currSprite], pos, new Rectangle(0, 0, 16, 24), Color.White, rotation, new Vector2(8, 16), 4.0f, SpriteEffects.None, 1.0f);
+            //this.spriteBatch.Draw(this.sprites[this.currSprite], pos, new Rectangle(0, 0, 16, 24), Color.White, rotation, new Vector2(8, 16), 4.0f, SpriteEffects.None, 1.0f);
+            this.soldier.Draw(gameTime);
             this.spriteBatch.End();
 
             base.Draw(gameTime);

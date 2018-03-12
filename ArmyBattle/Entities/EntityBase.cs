@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ArmyBattle.Utilities;
-using ArmyBattle.Messaging;
+using ArmyBattle.Framework.Messaging;
 
 
 namespace ArmyBattle.Entities
