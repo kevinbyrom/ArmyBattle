@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 
 
@@ -18,7 +19,8 @@ namespace ArmyBattle.Utilities
 
         public static float ToRadians(this Vector2 v)
         {
-            return (float)Math.Atan2(v.X, -v.Y);
+            var rads = (float)Math.Atan2(v.Y, v.X);
+            return rads;
         }
 
 

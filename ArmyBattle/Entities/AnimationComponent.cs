@@ -30,8 +30,8 @@ namespace ArmyBattle.Components
         }
 
         private Animation animation;
+        private int currTicks;
         private int currFrame;
-
 
         public AnimationComponent(Game game) : base(game)
         {
@@ -43,6 +43,17 @@ namespace ArmyBattle.Components
             base.Update(gameTime);
 
             this.TargetSprite.SourceRect = this.animation.FrameRects[this.currFrame];
+
+            this.currTicks += 1;
+
+            if (this.currTicks >= this.animation.TicksPerFrame)
+            {
+                this.currTicks = this.currTicks % this.animation.TicksPerFrame;
+                this.currFrame++;
+
+                if (this.currFrame >= this.animation.FrameRects.Count())
+                    this.currFrame = 0;
+            }
         }
     }
 }

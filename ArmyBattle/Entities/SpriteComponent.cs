@@ -24,7 +24,9 @@ namespace ArmyBattle.Components
 
         public SpriteComponent(Game game) : base(game)
         {
-
+            this.Color = Color.White;
+            this.Scale = 1.0f;
+            this.Layer = 0.0f;
         }
 
 
