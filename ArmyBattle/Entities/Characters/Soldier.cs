@@ -30,10 +30,10 @@ namespace ArmyBattle.Entities.Characters
         public static Rectangle FeetRun1Rect = new Rectangle(6 * 32, 0, 32, 32);
         public static Rectangle FeetRun2Rect = new Rectangle(7 * 32, 0, 32, 32);
 
-        public static Animation Stand = Animation.Create(StandRect);
-        public static Animation Run = Animation.Create(StandRect, Run1Rect, StandRect, Run2Rect);
-        public static Animation FeetStand = Animation.Create(FeetStandRect);
-        public static Animation FeetRun = Animation.Create(FeetStandRect, FeetRun1Rect, FeetStandRect, FeetRun2Rect);
+        public static Animation Stand = Animation.Create(4, StandRect);
+        public static Animation Run = Animation.Create(4, StandRect);
+        public static Animation FeetStand = Animation.Create(4, FeetStandRect);
+        public static Animation FeetRun = Animation.Create(4, FeetStandRect, FeetRun1Rect, FeetStandRect, FeetRun2Rect);
     }
 
     public class Soldier : EntityBase
@@ -119,7 +119,11 @@ namespace ArmyBattle.Entities.Characters
                 this.Facing.X = padState.ThumbSticks.Right.X;
                 this.Facing.Y = -padState.ThumbSticks.Right.Y;
             }
-
+            else if (this.Velocity != Vector2.Zero)
+            {
+                this.Facing = this.Velocity;
+                this.Facing.Normalize();
+            }
 
             // Set animation based on current movement / shooting
 

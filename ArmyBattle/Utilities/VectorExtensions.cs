@@ -19,8 +19,7 @@ namespace ArmyBattle.Utilities
 
         public static float ToRadians(this Vector2 v)
         {
-            var rads = (float)Math.Atan2(-v.X, -v.Y);
-            Debug.WriteLine(rads);
+            var rads = (float)Math.Atan2(v.Y, v.X);
             return rads;
         }
 

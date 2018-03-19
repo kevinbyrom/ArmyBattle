@@ -96,6 +96,12 @@ namespace ArmyBattle
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed)
+            {
+                this.graphics.IsFullScreen = true;
+                this.graphics.ApplyChanges();   
+            }
+
             this.soldier.Update(gameTime);
 
             // Move the helicopter
