@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ArmyBattle.Components;
-
+using ArmyBattle.Framework.Graphics;
 
 
 
@@ -16,13 +16,13 @@ namespace ArmyBattle.Entities.Characters
     
     public class Copter : EntityBase
     {
-        SpriteComponent sprite;
+        Sprite sprite;
         AnimationComponent animation;
 
 
         public Copter(Game game) : base(game)
         {
-            sprite = new SpriteComponent(game);
+            sprite = new Sprite(game);
         }
         
 

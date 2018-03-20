@@ -68,7 +68,6 @@
     <Compile Include="Entities\AnimationComponent.cs" />
     <Compile Include="Entities\FiringComponent.cs" />
     <Compile Include="Entities\HealthComponent.cs" />
-    <Compile Include="Entities\SpriteComponent.cs" />
     <Compile Include="Framework\States\State.cs" />
     <Compile Include="Framework\Graphics\Sprite.cs" />
   </ItemGroup>

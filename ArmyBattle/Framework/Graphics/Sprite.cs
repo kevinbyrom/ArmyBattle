@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 
-namespace ArmyBattle.Framework
+namespace ArmyBattle.Framework.Graphics
 {
     public class Sprite : DrawableGameComponent
     {
@@ -78,6 +78,14 @@ namespace ArmyBattle.Framework
         }
 
 
+        public Sprite(Game game, int width, int height) : this(game)
+        {
+            this.width = width;
+            this.height = height;
+        }
+
+
+
         public override void Draw(GameTime gameTime)
         {
             SpriteBatch spriteBatch = this.Game.Services.GetService<SpriteBatch>();
@@ -88,6 +96,9 @@ namespace ArmyBattle.Framework
 
         private void calculateFrameRects()
         {
+            if (this.texture == null || this.Width == 0 || this.Height == 0)
+                return;
+            
             var numX = this.texture.Width / this.Width;
             var numY = this.texture.Height / this.Height;
 

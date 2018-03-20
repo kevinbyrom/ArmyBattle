@@ -6,19 +6,19 @@ namespace ArmyBattle.Framework.Graphics
 {
     public class Animation
     {
-        public Rectangle[] FrameRects;
+        public int[] Frames;
         public int TicksPerFrame;
 
         public Animation()
         {
         }
 
-        static public Animation Create(int ticksPerFrame, params Rectangle[] rects)
+        static public Animation Create(int ticksPerFrame, params int[] frames)
         {
             Animation anim = new Animation();
 
             anim.TicksPerFrame = ticksPerFrame;
-            anim.FrameRects = rects;
+            anim.Frames = frames;
 
             return anim;
         }

@@ -22,42 +22,39 @@ namespace ArmyBattle.Entities.Characters
 
     public static class SoldierAnimations
     {
-        public static Rectangle StandRect = new Rectangle(0, 0, 32, 32);
-        public static Rectangle Run1Rect = new Rectangle(32, 0, 32, 32);
-        public static Rectangle Run2Rect = new Rectangle(64, 0, 32, 32);
-
-        public static Rectangle FeetStandRect = new Rectangle(5 * 32, 0, 32, 32);
-        public static Rectangle FeetRun1Rect = new Rectangle(6 * 32, 0, 32, 32);
-        public static Rectangle FeetRun2Rect = new Rectangle(7 * 32, 0, 32, 32);
-
-        public static Animation Stand = Animation.Create(4, StandRect);
-        public static Animation Run = Animation.Create(4, StandRect);
-        public static Animation FeetStand = Animation.Create(4, FeetStandRect);
-        public static Animation FeetRun = Animation.Create(4, FeetStandRect, FeetRun1Rect, FeetStandRect, FeetRun2Rect);
+        public static Animation Stand = Animation.Create(4, new int[] { 0 });
+        public static Animation Run = Animation.Create(4, new int[] { 0 });
+        public static Animation FeetStand = Animation.Create(4, new int[] { 5 });
+        public static Animation FeetRun = Animation.Create(4, new int[] { 5, 6, 5, 7});
     }
 
     public class Soldier : EntityBase
     {
+        const int SOLDER_SPRITE_WIDTH = 32;
+        const int SOLDER_SPRITE_HEIGHT = 32;
+        const int SOLDER_SPRITE_ORIGIN_X = SOLDER_SPRITE_WIDTH / 2;
+        const int SOLDER_SPRITE_ORIGIN_Y = SOLDER_SPRITE_HEIGHT / 2;
+
         public Vector2 Velocity;
         public Vector2 Facing;
-        public SpriteComponent BodySprite;
+        public Sprite BodySprite;
         public AnimationComponent BodyAnimator;
-        public SpriteComponent FeetSprite;
+        public Sprite FeetSprite;
         public AnimationComponent FeetAnimator;
 
         private StateMachine<SolderStates> entityState;
 
         public Soldier(Game game) : base(game)
         {
-            this.BodySprite = new SpriteComponent(game);
-            this.BodySprite.Origin = new Vector2(16, 16);
+            this.BodySprite = new Sprite(game, SOLDER_SPRITE_WIDTH, SOLDER_SPRITE_HEIGHT);
+            this.BodySprite.Origin = new Vector2(SOLDER_SPRITE_ORIGIN_X, SOLDER_SPRITE_ORIGIN_Y);
             this.BodyAnimator = new AnimationComponent(game);
-            this.BodyAnimator.TargetSprite = this.BodySprite;
+            this.BodyAnimator.Sprite = this.BodySprite;
 
-            this.FeetSprite = new SpriteComponent(game);
-            this.FeetSprite.Origin = new Vector2(16, 16);
+            this.FeetSprite = new Sprite(game, SOLDER_SPRITE_WIDTH, SOLDER_SPRITE_HEIGHT);
+            this.FeetSprite.Origin = new Vector2(SOLDER_SPRITE_ORIGIN_X, SOLDER_SPRITE_ORIGIN_Y);
             this.FeetAnimator = new AnimationComponent(game);
-            this.FeetAnimator.TargetSprite = this.FeetSprite;
+            this.FeetAnimator.Sprite = this.FeetSprite;
 
             this.entityState = new StateMachine<SolderStates>();
             this.entityState[SolderStates.Normal].Update = Update_NormalState;
@@ -149,6 +146,8 @@ namespace ArmyBattle.Entities.Characters
         {
             base.Draw(gameTime);
 
+            this.FeetSprite.Scale = 2;
+            this.BodySprite.Scale = 2;
             this.FeetSprite.Draw(gameTime);
             this.BodySprite.Draw(gameTime);
         }

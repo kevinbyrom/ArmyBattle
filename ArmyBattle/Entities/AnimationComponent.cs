@@ -12,7 +12,7 @@ namespace ArmyBattle.Components
 {
     public class AnimationComponent : GameComponent
     {
-        public SpriteComponent TargetSprite;
+        public Sprite Sprite;
 
         public Animation Animation 
         {
@@ -42,7 +42,7 @@ namespace ArmyBattle.Components
         {
             base.Update(gameTime);
 
-            this.TargetSprite.SourceRect = this.animation.FrameRects[this.currFrame];
+            this.Sprite.Frame = this.animation.Frames[this.currFrame];
 
             this.currTicks += 1;
 
@@ -51,7 +51,7 @@ namespace ArmyBattle.Components
                 this.currTicks = this.currTicks % this.animation.TicksPerFrame;
                 this.currFrame++;
 
-                if (this.currFrame >= this.animation.FrameRects.Count())
+                if (this.currFrame >= this.animation.Frames.Count())
                     this.currFrame = 0;
             }
         }
